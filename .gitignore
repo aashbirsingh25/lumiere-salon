@@ -18,3 +18,7 @@ npm-debug.log*
 .env
 .env.local
 *.local
+
+# Raw video source (large AI-generated/stock clips) — only the processed,
+# re-encoded clip in public/ is tracked and shipped.
+/video/

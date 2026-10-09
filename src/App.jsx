@@ -2,6 +2,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
+import ScrollHair from "./components/ScrollHair";
 import Services from "./components/Services";
 import About from "./components/About";
 import Team from "./components/Team";
@@ -16,6 +17,7 @@ function App() {
       <Navbar />
       <Hero />
       <Marquee />
+      <ScrollHair />
       <Services />
       <About />
       <Team />

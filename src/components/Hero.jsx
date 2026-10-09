@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Magnetic from "./Magnetic";
 
 // Hero: full-screen image with elegant overlaid text.
 // The background slowly zooms, and the text rises in one line at a time.
@@ -46,7 +47,9 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.1 }}
         >
-          <a href="#booking" className="btn btn-light">Book Your Experience</a>
+          <Magnetic>
+            <a href="#booking" className="btn btn-light">Book Your Experience</a>
+          </Magnetic>
         </motion.div>
       </div>
 

@@ -1,4 +1,4 @@
-import Reveal from "./Reveal";
+import Reveal, { SplitReveal } from "./Reveal";
 
 // Services: image-topped treatment cards. Each has a photo so it feels rich, not plain.
 const services = [
@@ -16,7 +16,7 @@ function Services() {
       <div className="container">
         <Reveal>
           <span className="eyebrow" style={{ textAlign: "center", display: "block" }}>Our Treatments</span>
-          <h2 className="section-title">The <em>Collection</em></h2>
+          <SplitReveal as="h2" className="section-title">The <em>Collection</em></SplitReveal>
           <p className="section-subtitle">
             A curated selection of signature treatments, each performed with
             uncompromising attention to detail.

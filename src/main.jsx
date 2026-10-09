@@ -1,8 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './index.css'
 import App from './App.jsx'
+
+gsap.registerPlugin(ScrollTrigger)
 
 // Lenis: gives the whole page buttery, weighted "momentum" scrolling
 // (the premium feel on luxury/Awwwards sites).
@@ -13,11 +17,13 @@ const lenis = new Lenis({
   wheelMultiplier: 0.9,                            // slightly slower, more deliberate
   touchMultiplier: 1.6,
 })
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-requestAnimationFrame(raf)
+
+// IMPORTANT: let GSAP's ScrollTrigger drive Lenis, so the scroll-scrubbed
+// video section (ScrollHair) stays perfectly in sync with smooth scroll —
+// otherwise the two scroll systems fight each other.
+lenis.on('scroll', ScrollTrigger.update)
+gsap.ticker.add((time) => lenis.raf(time * 1000))
+gsap.ticker.lagSmoothing(0)
 
 // Make anchor links (e.g. "Book Now" -> #booking) scroll smoothly via Lenis too.
 document.addEventListener('click', (e) => {

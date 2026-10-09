@@ -58,6 +58,10 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.08; }
 .section-title em { font-style: italic; color: var(--rose-deep); }
 .section-subtitle { text-align: center; color: var(--muted); max-width: 560px; margin: 0 auto 86px; font-size: 1.05rem; }
 
+/* SplitReveal headings wrap each word in an inline-block span for the
+   staggered rise animation; keep that from disturbing centered titles. */
+.section-title, .about-text h2 { word-spacing: -0.02em; }
+
 /* Buttons */
 .btn {
   display: inline-block;
@@ -105,11 +109,41 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.08; }
 .scroll-cue::after { content: ''; display: block; width: 1px; height: 42px; background: linear-gradient(rgba(255,255,255,0.7), transparent); margin: 13px auto 0; }
 
 /* ===== Marquee ===== */
+/* Track position is now driven by GSAP (see Marquee.jsx), not CSS keyframes,
+   so hover-pause can ease smoothly instead of snapping. */
 .marquee { background: var(--rose); color: var(--white); padding: 22px 0; overflow: hidden; white-space: nowrap; }
-.marquee-track { display: inline-flex; gap: 60px; animation: scrollx 30s linear infinite; }
+.marquee-track { display: inline-flex; gap: 60px; will-change: transform; }
 .marquee span { font-family: var(--serif); font-style: italic; font-size: 1.55rem; }
 .marquee span::after { content: '✦'; margin-left: 60px; font-style: normal; font-size: 0.85rem; vertical-align: middle; }
-@keyframes scrollx { to { transform: translateX(-50%); } }
+
+/* ===== Magnetic buttons ===== */
+/* Wraps a .btn so it can translate toward the cursor on hover (see
+   Magnetic.jsx). The transform is set inline via JS; this just makes sure
+   the motion itself feels soft when it snaps back on mouse-leave. */
+.magnetic { display: inline-block; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.magnetic .btn { display: inline-block; }
+
+/* ===== Scroll-Scrubbed Video (ScrollHair) ===== */
+/* Same technique as the restaurant site's pizza cheese-pull: video
+   currentTime is driven directly by scroll progress (see ScrollHair.jsx). */
+.scrollvideo { height: 100vh; background: #000; overflow: hidden; position: relative; }
+.sv-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sv-overlay { position: absolute; inset: 0; z-index: 1; background:
+  radial-gradient(ellipse 70% 50% at 50% 50%, rgba(42,35,32,0.55) 0%, rgba(42,35,32,0.25) 60%, rgba(42,35,32,0.1) 100%),
+  linear-gradient(180deg, rgba(42,35,32,0.4) 0%, rgba(42,35,32,0.15) 45%, rgba(42,35,32,0.5) 100%); }
+.sv-caps { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+.sv-cap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 24px)); width: 90vw; opacity: 0; transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.sv-cap.is-active { opacity: 1; transform: translate(-50%, -50%); }
+.sv-cap .eyebrow { color: var(--rose-soft); display: block; margin-bottom: 14px; text-shadow: 0 2px 16px rgba(0,0,0,0.7); }
+.sv-cap h2 { color: var(--white); font-size: clamp(2.4rem, 6vw, 4.6rem); text-shadow: 0 4px 24px rgba(0,0,0,0.5); }
+.sv-cap h2 em { font-style: italic; color: var(--rose-soft); }
+
+/* Fallback: no scroll-scrub video present yet (or it failed to load) — show
+   a static warm-toned section instead of a dead pinned black box. */
+.scrollhair-fallback { height: 70vh; background: linear-gradient(135deg, var(--rose-deep), var(--ink)); }
+.scrollhair-fallback .sv-cap { position: static; transform: none; opacity: 1; width: auto; }
+.scrollhair-fallback .sv-caps { position: relative; }
+.scrollhair.scrollhair-loading { background: var(--ink); }
 
 /* ===== Services ===== */
 .services { background: var(--bg); }

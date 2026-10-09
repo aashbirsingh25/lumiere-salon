@@ -1,4 +1,4 @@
-import Reveal from "./Reveal";
+import Reveal, { SplitReveal } from "./Reveal";
 
 // Team: meet-the-stylists section. Very "salon" -- builds personal trust.
 const stylists = [
@@ -13,7 +13,7 @@ function Team() {
       <div className="container">
         <Reveal>
           <span className="eyebrow" style={{ textAlign: "center", display: "block" }}>Our Team</span>
-          <h2 className="section-title">Meet Your <em>Stylists</em></h2>
+          <SplitReveal as="h2" className="section-title">Meet Your <em>Stylists</em></SplitReveal>
           <p className="section-subtitle">
             A hand-picked team of experts who treat every chair like a work of art.
           </p>

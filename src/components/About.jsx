@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Reveal from "./Reveal";
+import Reveal, { SplitReveal } from "./Reveal";
 
 // A set of salon images for the About carousel — all unique, not used elsewhere on the site.
 const gallery = [
@@ -68,7 +68,7 @@ function About() {
           <div className="about-text">
             <Reveal>
               <span className="eyebrow">About Lumière</span>
-              <h2>A decade devoted to the <em>craft of beauty</em></h2>
+              <SplitReveal as="h2">A decade devoted to the <em>craft of beauty</em></SplitReveal>
               <p>
                 Since 2014, Lumière has been a quiet retreat from the
                 ordinary — a place where artistry, precision, and genuine care
