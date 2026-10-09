@@ -2,6 +2,8 @@
 
 A modern, responsive salon website with an AI concierge chatbot, built with React and Vite.
 
+**Live demo:** https://lumiere-salon-two.vercel.app/
+
 ![Status](https://img.shields.io/badge/status-live-success)
 
 ## Features
